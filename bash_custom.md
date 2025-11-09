@@ -1,8 +1,7 @@
 ---
 layout: default
 title: personalización consola bash
-fecha: 2023-12-08
-nav_order: 1
+fecha: 2025-11-09
 ---
 
 &nbsp;
