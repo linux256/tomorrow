@@ -5,9 +5,7 @@ fecha: 2024-02-13
 nav_order: 3
 ---
 
-# <a href="../" style="text-decoration: none; color:black">&larr;&larr;</a>&emsp; git
-
-[1 que es github](#1-que-es-github)
+[1 que es git](#1-que-es-git)
 
 [2 instalacion de git](#2-instalacion-de-git)
 
@@ -19,7 +17,7 @@ nav_order: 3
 
 &nbsp;
 
-## 1 que es github
+## 1 que es git
 Software de control de versiones creado en 2005 por Linus Torvalds, para trabajar con varios desarrolladores en el núcleo de Linux.
 **git** rastrea el contenido y permite revertir y regresar a una versión anterior del código.
 
