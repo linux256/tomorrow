@@ -103,10 +103,27 @@ En RockyLinux (RedHat, CentOS),
        git push origin master
 
 
-## 5 acceder a github de manera remota
-Desde 2021 no se admite acceso remoto por contraseña a github; hay que emplear un PAT (Personal Access Token)
+## 5 acceder a github de manera remota sin usuario ni contraseña
+Desde 2021 no se admite acceso remoto por contraseña a github. Se puede acceder por SSH o emplear un PAT (Personal Access Token)
 
-Se obtiene desde *Settings > Developer Settings > Personal Access Token > Tokens (classic) > Generate a Personal Access Token > click Generate token*
+(1) Para acceder por SSH basta generar una clave local y cargar la clave pública en GitHub.com
+       
+       #generar la pareja de claves, con passphrase o no y archivándola donde se quiera
+       ssh-keygen -t rsa -b 4096 -C "nombre_usuario"
+       
+       #editar  ~/.ssh/config
+       Host github.com
+         User git
+         IdentityFile ~/path_to_private_key/id_rsa
+
+       #comprobar la conexión
+       ssh -T git@github.com
+       
+       #al definir el repositorio remoto, la URL debe ser: git@github.com:usuario/repositorio.git
+
+&nbsp;
+
+(2) Para emplear PAT, se obtiene desde *Settings > Developer Settings > Personal Access Token > Tokens (classic) > Generate a Personal Access Token > click Generate token*
 
 Al seleccionar los permisos de acceso, se elige el primer bloque completo "repo"
 
