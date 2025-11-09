@@ -2,10 +2,7 @@
 layout: default
 title: referencia rapida de docker
 fecha: 2024-02-21
-nav_order: 4
 ---
-
-# <a href="../" style="text-decoration: none; color:black">&larr;&larr;</a>&emsp; docker
 
 **Referencia**    [https://docs.docker.com/engine/](https://docs.docker.com/engine/)
 
