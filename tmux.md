@@ -2,9 +2,7 @@
 layout: default
 title: referencia rapida de tmux
 fecha: 2023-12-08
-nav_order: 2
 ---
-# <a href="../" style="text-decoration: none; color:black">&larr;&larr;</a>&emsp; tmux
 
 &nbsp;
 
