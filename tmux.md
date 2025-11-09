@@ -163,7 +163,7 @@ Se resume el caso de uso nativo empleando la conexión al socket
 
 &nbsp;
 
-## 8 sesiones agrupadas
+### sesiones agrupadas
 
 Diferentes sesiones pueden pertenecer a un mismo grupo o sesion agrupada. Una sesion agrupada se muestra como un mismo conjunto de ventanas, donde cada cliente conectado pueden estar en una ventana distinta de la sesión agrupada.
 
@@ -192,7 +192,7 @@ Si alguna de las dos personas se desconecta y lista las sesiones, el servidor mu
 &nbsp;
 
 
-## 9 plugins
+## 8 plugins
 Para gestionar los plugins, resulta de utilidad **Tmux Plugin Manager**. Para instalarlo,
 
 - Se clona el repositorio
