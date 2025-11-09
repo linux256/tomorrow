@@ -8,11 +8,11 @@ fecha: 2024-02-13
 
 [2 instalacion de git](#2-instalacion-de-git)
 
-[3 comenzar cuando el repositorio está en línea](#3comenzar-cuando-el-repositorio-está-en-línea)
+[3 comenzar cuando el repositorio está en línea](#3-comenzar-cuando-el-repositorio-está-en-línea)
 
 [4 comenzar creando un repositorio local y luego enviándolo a un repo en línea](#4-comenzar-creando-un-repositorio-local-y-luego-enviándolo-a-un-repo-en-línea)
 
-[5 acceder a github de manera remota](#5-acceder-a-github-de-manera-remota)
+[5 acceder a github de manera remota sin usuario/contraseña](#-5-acceder-a-github-de-manera-remota-sin-usuario/contraseña)
 
 &nbsp;
 
@@ -103,7 +103,7 @@ En RockyLinux (RedHat, CentOS),
        git push origin master
 
 
-## 5 acceder a github de manera remota sin usuario ni contraseña
+## 5 acceder a github de manera remota sin usuario/contraseña
 Desde 2021 no se admite acceso remoto por contraseña a github. Se puede acceder por SSH o emplear un PAT (Personal Access Token)
 
 (1) Para acceder por SSH basta generar una clave local y cargar la clave pública en GitHub.com
