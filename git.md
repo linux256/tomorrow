@@ -2,7 +2,6 @@
 layout: default
 title: referencia rapida de git
 fecha: 2024-02-13
-nav_order: 3
 ---
 
 [1 que es git](#1-que-es-git)
