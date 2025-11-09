@@ -6,7 +6,7 @@ fecha: 2023-12-08
 
 &nbsp;
 
-## qué es
+## 1 qué es
 Terminal MUltipleXer, con arquitectura cliente-servidor, donde el servidor mantienen en ejecucion las sesiones de manera que el cliente puede volver a conectarse a ellas, por ejemplo antes desconexiones SSH.
 
 Es posterior a screen y permite multiples ventanas, cada una de las cuales dividida en varias partes, para tener vista y ejecución simultanea de multiples shell.
@@ -17,7 +17,7 @@ Admite personalizacion global en /etc/tmux.conf e individual en el fichero ~/.tm
 
 &nbsp;
 
-### conceptos
+## 2 conceptos
 - **session** es una coleccion de *windows* o ventanas. Las sesiones pueden tener nombre o no (numeradas desde 0)
 
 - **window** es una coleccion de *panes* o paneles. Las ventanas pueden tener nombre o no (numeradas desde 0). Solo se muestra una ventana a la vez, ocupando toda la pantalla y pudiendo cambiar de una ventana a otra a modo de pestañas
@@ -26,7 +26,7 @@ Admite personalizacion global en /etc/tmux.conf e individual en el fichero ~/.tm
 
 &nbsp;
 
-## comandos básicos
+## 3 comandos básicos
 
 - version de tmux &emsp; `tmux -V`
 - ejecutar en 256 colores &emsp; `tmux -2`
@@ -44,7 +44,7 @@ Admite personalizacion global en /etc/tmux.conf e individual en el fichero ~/.tm
 
 &nbsp;
 
-## secuencias de teclas
+## 4 secuencias de teclas
 
 ### generales
 - prefijo (PR) &emsp; `CTRL-b`
@@ -77,7 +77,7 @@ Admite personalizacion global en /etc/tmux.conf e individual en el fichero ~/.tm
 
 &nbsp;
 
-## scripting
+## 5 scripting
 existen al menos tres vias para automatizar la configuración de una sesion, definiendo sus ventanas, paneles y que comandos se lanzan en cada panel
 - empleando un fichero de configuracion de tmux, que contenga las ordenes para crear el entorno. Este es el mecanismo recomendado por ser nativo de tmux
 
@@ -109,7 +109,7 @@ Para acceder a este entorno, tras comprobar cob `tmux ls` que no existe ya la se
 
 &nbsp;
 
-## copiar y pegar texto mostrado por pantalla
+## 6 copiar y pegar texto mostrado por pantalla
 
 ### movimiento
 
@@ -149,7 +149,7 @@ Para compartir el buffer con el s.o. se puede emplear la utilidad externa xclip,
 
 &nbsp;
 
-## compartir sesión de tmux
+## 7 compartir sesión de tmux
 
 Varias personas pueden estar conectadas a una misma sesión de tmux y trabajar simultaneamente sobre un mismo panel o sobre distintos paneles, de manera colaborativa. Existen al menos tres vias para esto
 
@@ -163,7 +163,7 @@ Se resume el caso de uso nativo empleando la conexión al socket
 
 &nbsp;
 
-### sesiones agrupadas
+## 8 sesiones agrupadas
 
 Diferentes sesiones pueden pertenecer a un mismo grupo o sesion agrupada. Una sesion agrupada se muestra como un mismo conjunto de ventanas, donde cada cliente conectado pueden estar en una ventana distinta de la sesión agrupada.
 
@@ -192,7 +192,7 @@ Si alguna de las dos personas se desconecta y lista las sesiones, el servidor mu
 &nbsp;
 
 
-### plugins
+## 9 plugins
 Para gestionar los plugins, resulta de utilidad **Tmux Plugin Manager**. Para instalarlo,
 
 - Se clona el repositorio
