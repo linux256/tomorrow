@@ -19,7 +19,7 @@ Software de control de versiones creado en 2005 por Linus Torvalds, para trabaja
 
 &nbsp;
 
-## 2 instalacion de git
+## 2 instalación de git
 En RockyLinux (RedHat, CentOS),
 
     yum install -y git
