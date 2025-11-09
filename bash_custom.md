@@ -4,23 +4,10 @@ title: personalización consola bash
 fecha: 2023-12-08
 nav_order: 1
 ---
-# personalización consola bash
-{: .no_toc }
+
 &nbsp;
 
-<details markdown="block">
-  <summary>
-    Tabla de contenido
-  </summary>
-{: .text-delta }
-1. ~/.bash_profile
-2. ~/.bashrc
-3. ~/.tmux.conf
-4. ~/.vimrc
-5. ~/.config/htop/htoprc
-6. otras configuraciones
-{:toc}
-</details>
+# personalización consola bash
 
 ***
 
