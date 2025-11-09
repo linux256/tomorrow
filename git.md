@@ -12,7 +12,7 @@ fecha: 2024-02-13
 
 [4 comenzar creando un repositorio local y luego enviándolo a un repo en línea](#4-comenzar-creando-un-repositorio-local-y-luego-enviándolo-a-un-repo-en-línea)
 
-[5 acceder a github de manera remota sin usuario+contraseña](#5-acceder-a-github-de-manera-remota-sin-usuario+contraseña)
+[5 acceder a github de manera remota sin usuario+contraseña](#5-acceder-a-github-de-manera-remota-sin-usuariocontraseña)
 
 &nbsp;
 
