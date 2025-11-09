@@ -63,10 +63,12 @@ En RockyLinux (RedHat, CentOS),
 6. Enviar ficheros a la rama "master" del repositorio en línea "origin"
 
        git push origin master
+       git push origin main  # en github el branch por defecto es main
 
 7. Descargar ficheros de la rama "master" del repositorio en línea "origin"
 
        git pull origin master
+       git pull origin main  # en github el branch por defecto es main
 
 &nbsp;
 
