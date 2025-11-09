@@ -6,7 +6,7 @@ fecha: 2024-02-13
 
 &nbsp;
 
-## 1 que es git
+## 1 qué es git
 Software de control de versiones creado en 2005 por Linus Torvalds, para trabajar con varios desarrolladores en el núcleo de Linux.
 **git** rastrea el contenido y permite revertir y regresar a una versión anterior del código.
 
