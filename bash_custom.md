@@ -29,6 +29,7 @@ Se ejecuta automaticamente por bash en un nuevo shell interactivo sin login
     export PROMPT_COMMAND=$PROMPT_COMMAND'; printf "\\e[90m%*s\\e[0m"  $COLUMNS "$(pwd) ($(ps hotty $$)) $(hostname -I)"'
     
 En el fichero de personalizacion .bashrc de root , para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m), añadir al final de .bashrc --regresar a modo normal (0m)--:
+    
     ...
     export PS1="\[\e[7m\]$(echo $PS1 | sed 's/ *$//')\[\e[0m\] "
 
