@@ -6,11 +6,7 @@ fecha: 2025-11-09
 
 &nbsp;
 
-# personalización consola bash
-
-&nbsp;
-
-## ~/.bashrc
+## 1 history y prompt  ~/.bashrc
 Se ejecuta automaticamente por bash en un nuevo shell interactivo sin login
 
     # personalizacion
@@ -34,7 +30,7 @@ En el fichero de personalizacion .bashrc de root , para tener prompt en video in
 
 &nbsp;
 
-## ~/.tmux.conf
+## 2 tmux  ~/.tmux.conf
     
     # reducir tiempo de espera CTRL-b
     set  -sg escape-time 1
@@ -94,7 +90,7 @@ En el fichero de personalizacion .bashrc de root , para tener prompt en video in
 
 &nbsp;
 
-## ~/.vimrc
+## 3 editor vim  ~/.vimrc
     
     syntax on
     set expandtab
@@ -124,7 +120,7 @@ En el fichero de personalizacion .bashrc de root , para tener prompt en video in
 
 &nbsp;
 
-## ~/.config/htop/htoprc
+## 4 recursos htop  ~/.config/htop/htoprc
 
     # Beware! This file is rewritten by htop when settings are changed in the interface.
     # The parser is also very primitive, and not human-friendly.
