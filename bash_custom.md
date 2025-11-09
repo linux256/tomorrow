@@ -9,7 +9,7 @@ nav_order: 1
 
 # personalización consola bash
 
-***
+&nbsp;
 
 ## ~/.bash_profile
 
