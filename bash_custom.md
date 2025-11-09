@@ -11,38 +11,31 @@ nav_order: 1
 
 &nbsp;
 
-## ~/.bash_profile
+## ~/.bashrc
+Se ejecuta automaticamente por bash en un nuevo shell interactivo sin login
 
-Se ejecuta automaticamente por bash en un nuevo shell interactivo con login 
-
-*login/no-login shell: 'shopt login_shell' o 'echo $0' ; mas ayuda [bash startup files](https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html)*
-
+    # personalizacion
+    alias sudo='sudo '
+    alias ll='ls -halF'
+    alias catnc="grep -vn -e '^\s*#' -e '^\s*$' "
+    bind "set enable-bracketed-paste off"
     shopt -s histappend
     export HISTTIMEFORMAT="%y/%m/%d %T   "
     export HISTSIZE=100000
     export HISTFILESIZE=1000000
-    export PROMPT_COMMAND="history -a; echo; echo; printf \"\033]0;%s@%s:%s\007\" \"${USER}\" \"${HOSTNAME%%.*}    \" \"${PWD/#$HOME/\~}\""
+    export PROMPT_COMMAND='history -a'        
 
-&nbsp;
-
-## ~/.bashrc
-
-Se ejecuta automaticamente por bash en un nuevo shell interactivo sin login
-
-    alias catnc="grep -vn -e '^\s*#' -e '^\s*$'"
-    alias sudo='sudo '
-    bind "set enable-bracketed-paste off"
-
-Para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m) y distinguir shell de root, añadir al final de .bashrc --en el ejemplo, video inverso, para regresar a modo normal (0m)--
-
+    #prompt con path absoluto a la derecha y nombre de terminal
+    export PROMPT_COMMAND=$PROMPT_COMMAND'; printf "\\e[90m%*s\\e[0m"  $COLUMNS "$(pwd) ($(ps hotty $$)) $(hostname -I)"'
+    
+En el fichero de personalizacion .bashrc de root , para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m), añadir al final de .bashrc --regresar a modo normal (0m)--:
     ...
-    PSTEMP=$(echo $PS1 | sed 's/ *$//')
-    PS1="\e[7m$PSTEMP\e[0m "
+    export PS1="\[\e[7m\]$(echo $PS1 | sed 's/ *$//')\[\e[0m\] "
 
 &nbsp;
 
 ## ~/.tmux.conf
-
+    
     # cambiar prefix y numeracion de ventanas y paneles
     set  -g prefix M-º
     set  -s escape-time 1
@@ -92,7 +85,7 @@ Para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m) y disting
 &nbsp;
 
 ## ~/.vimrc
-
+    
     syntax on
     set expandtab
     set tabstop=4
@@ -101,11 +94,23 @@ Para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m) y disting
     set backup
     set cursorline
     set t_Co=256
+    set term=xterm-256color
+    set colorcolumn=80
+    set textwidth=0
+    set wrapmargin=0
+    set formatoptions+=t
+    set linebreak
+    set listchars=nbsp:.
+    set mmp=2000000
+
     hi CursorLine   cterm=NONE ctermbg=234 ctermfg=NONE
     hi CursorLineNr cterm=NONE
     hi Visual cterm=none ctermbg=darkgrey ctermfg=cyan
+    hi ColorColumn ctermbg=234
+
     :nnoremap H :set cursorline!<CR>
-    set term=xterm-256color
+    noremap <C-Z> :w!<CR>
+    inoremap <C-Z> <C-O>:w!<CR>
 
 &nbsp;
 
@@ -177,15 +182,4 @@ Para tener prompt en video inverso (7m), negrita (1m) o subrayado (4m) y disting
     .tree_sort_direction=1
     .all_branches_collapsed=0
 
-&nbsp;
-
-## otras configuraciones
-
-Journal persistente
-
-    cd /etc/systemd/
-    cp journald.conf journald.conf.bak
-    vim journald.conf
-    19:Storage=persistent
-    systemctl restart systemd-journald
 &nbsp;
