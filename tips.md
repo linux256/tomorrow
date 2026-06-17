@@ -1,10 +1,10 @@
 # Limitar la conectividad a un único host
 
-Se emplea **`firewalld`** para:
-(1) establecer la zona por defecto a DROP, de manera que todas las comunicaciones entrantes se pierdan
-(2) limitar el único origen permitido (`--add-source`) a la dirección IP habilitada, añadiéndola como único origen a la zona **`public`**
+Se emplea **`firewalld`** para, 
+1. establecer la zona por defecto a DROP, de manera que todas las comunicaciones entrantes se pierdan
+2. limitar el único origen permitido (**`--add-source`**) a la dirección IP habilitada, añadiéndola como único origen a la zona **`public`**
 
-Adicionalmente con (3) **`conntrack`** se vacía la tabla de segumiento de conexiones establecidas (`firewalld` es statefull) para cortar también las
+Adicionalmente con (3) **`conntrack`** se vacía la tabla de segumiento de conexiones establecidas (**`firewalld`** es statefull) para cortar también las
 conexiones que el servidor pueda tener establecidas previamente a esta configuración (ping continuo, sesiones ssh,...)
 
 
