@@ -20,14 +20,14 @@
     9. Playbooks  
     10. Configuration files  
     11. Roles  
-    12. Use provided documentation to look up specific information about Ansible modules and commands  
+    [12. Use provided documentation to look up specific information about Ansible modules and commands](#12-use-provided-documentation-to-look-up-specific-information-about-ansible-modules-and-commands)  
 &nbsp;
 
 **II. CONFIGURE ANSIBLE**  
-    [13. Create and modify ansible.cfg](#13-create-and-modify-ansible-cfg)  
+    [13. Create and modify ansible.cfg](#13-create-and-modify-ansiblecfg)  
     14. Modify ansible-navigator.yml  
     [15. Create a static host inventory file](#15-create-a-static-host-inventory-file)  
-    16. Create and use static inventories to define groups of hosts  
+    [16. Create and use static inventories to define groups of hosts](#16-create-and-use-static-inventories-to-define-groups-of-hosts)  
 &nbsp;
 
 **III. CONFIGURE ANSIBLE MANAGED NODES**  
@@ -87,9 +87,9 @@
 &nbsp;
 
 **Appendixes**  
-    a. [Configuration Management](#a-configuration-management)
-    b. [Installing Ansible](#b-installing-ansible)
-
+    [a. Configuration Management](#a-configuration-management)  
+    [b. Installing Ansible](#b-installing-ansible)  
+    [c. Using ad hoc commands](#c-using-ad-hoc-commands)  
 
 
 
@@ -124,15 +124,17 @@
 
 - **implicit groups**: `all`, `ungrouped`  
 
+- **implicit variable**: `hostvars`  
+ 
 - **groups**: set of hosts which share some criteria, like:  
     + function: web, db, ...  
     + geography: europe, spain,...  
     + staging: test, development, production,...  
 
-- *parameter* and command to show hosts,
+- parameter **`-i`** and command **`ansible-inventory`** to show hosts, groups and variables  
 
     ```
-    # to use all o some hosts from inventoryu "file"
+    # to use all o some hosts from inventory "file"
 
     ansible -i file  all  --list-hosts    
 
@@ -142,14 +144,14 @@
     ```
 
     ```
-    # to show hosts
+    # to show hosts and variables defined for the hosts & groups
 
     ansible-inventory  -i file  --list
     
     ansible-inventory  -i file  --graph
     ```
 
-- **dynamic inventory**: script to discover hosts  
+- **dynamic inventory**: script to discover hosts supporting `--list` and `--host` args,  
 
     ```
     chmod   +x listingdyn.py
@@ -157,7 +159,7 @@
     ansible -i listingdyn.py  all  --list-hosts
     ```
 
-- set **inventory directory** to use multiple inventory files, static and / or dynamic, with:  `-i dir`  
+- set a inventory directory to use **multiple inventory files**, static and / or dynamic, with:  `-i dir`  
 
 
 
@@ -236,8 +238,26 @@
 
 ### 12. Use provided documentation to look up specific information about Ansible modules and commands  
 
+- **ansible-doc** command for getting modules arguments, and *ansible is all about modules*  
 
+    ```
+    # list all installed modules
+    
+    ansible-doc  -l
+    
+    ansible-doc  -l  ansible.posix   # list only modules in "ansible.posix" collection
+    
+    ansible-doc  -F                  # includes path to the python source code .py
+    
+    
+    # get detailed help
+    
+    ansible-doc  module
+    
+    ansible-doc  module  -s          # best friend ansible writer command
 
+    ansible-dop  package -s | grep "(required)"     # mandatory arguments when using package mod
+    ```
 
 
 &nbsp;
@@ -250,7 +270,7 @@
 
 ---
 
-## II. CONFIGURE ANSIBLE
+## II. CONFIGURE ANSIBLE  
 
 ---
 
@@ -260,18 +280,57 @@
 
 &nbsp;
 
-### 13. Create and modify ansible.cfg
+### 13. Create and modify ansible.cfg   
 
-- **ansible** has 3 layers of configuration, most to less preferred:
-    + *project directory*: self contained environment that includes everything needed to work in a specific project
-        + **ansible.cfg**
-        + inventory
-        + variable files
-        + files used to include tasks
-        + playbooks
-    + *home directory*: allow one user to work with its specific settings
-    + *system level*: using `/etc/ansible/ansible.cfg` (default configuration) and `/etc/ansible/hosts` (default inventory)
+- **ansible** has 3 layers of configuration, most to less preferred:  
+    + *project directory*: self contained environment that includes everything needed to work in a specific project  
+        + **ansible.cfg**  
+        + inventory  
+        + variable files  
+        + files used to include tasks  
+        + playbooks  
+    + *home directory*: allow one user to work with its specific settings  
+    + *system level*: using `/etc/ansible/ansible.cfg` (default configuration) and `/etc/ansible/hosts` (default inventory)  
 
+- usual **minimum settings** in `/etc/ansible/ansible.cfg`  
+
+    ```
+    # MINIMUM SETTINGS
+    
+    [defaults]
+
+    remote_user=ansible
+
+    inventory=file
+
+    host_key_checking=false
+    
+    
+    
+    [privilege_escalation]
+    
+    become=true
+    
+    become_method=sudo
+    
+    become_user=root
+    
+    become_ask_pass=false
+    ```
+
+- other usual **settings**,  
+    + `module_name=raw` , sets default module instead of `command`  
+    + `command_warnings=false` , do not display warning messages  
+
+- **ansible-config** command to view *actual* configuration that is / will be used,  
+
+    ```
+    ansible-config  view       # show ansible.cfg content used
+
+    ansible-config  dump       # show all settings, and distingish customized from default values
+
+    ansible-config  list       # show extended help about settings, but not actual values
+    ```
 
 
 
@@ -279,29 +338,62 @@
 
 ### 15. Create a static host inventory file  
 
-- **static inventory**, list hosts, hosts groups, and host variables (not recommended)
+- **static inventory**, list hosts, hosts groups, and variables (not recommended). Using INI format:
 
     ```
-    # DEFAULT STATIC INVENTORY      /etc/ansible/hosts 
-    
-    host[001:010]                   # template
+    # DEFAULT STATIC INVENTORY                    /etc/ansible/hosts 
 
-    server[1:6].example.com         # template
+                                                  # HOSTS-------------------------------
+    192.168.4.1                                   # IP host
+        
+    host[001:010]                                 # template
+    server[1:6].example.com                       # template
+  
+
+                                                  # VARIABLES-------------------------------
+    server7.example.com      dns1=ggl.com         # host-only variable definition
+    server[3:4].example.com  dns1=yho.com         # host-range variable definition
     
-    192.168.4.1                     # IP host
+    [backup]
+    server7.example.com      dns1=loc.com         # host-only variable definition inside a group
+                                                  # overrides previous host variable definition
+                                                  # because is defined later
+    ```
+
+
+
+&nbsp;
+
+### 16. Create and use static inventories to define groups of hosts  
+
+- **static inventory**, list hosts, hosts groups, and variables (not recommended). Using INI format:
+
+    ```
+    # DEFAULT STATIC INVENTORY                    /etc/ansible/hosts 
+
+                                                  # GROUPS-------------------------------
+    [web]                                         # group definition
+    192.168.4.100                                 # host member not previously defined
+    server2.example.com                           # host member 
+    server[4:5].example.com                       # host range 
     
-    [web]                           # group definition
-    server2.example.com
-    192.168.4.100
-    
-    [db]                            # group definition
+    [db]                                          # group definition
     server5.example.com
+
+    [backup]
+    server7.example.com
     
-    [majorsrv:children]             # group with other groups as member
+    [majorsrv:children]                           # group with other groups as member
+    backup
     web
     db
-    
-    [web:vars]                      # variables for a group of hosts
+
+                                                  # VARIABLES-------------------------------
+    [backup:vars]                                 # group variable definition
+    dns1=rdx.com                                  # less priority than host-only definition
+  
+    [majorsrv:vars]                               # parent group variable definition
+    dns1=www.com                                  # less priority than children groups definitions
     ansible_user=ansible
     ansible_password=@nsbile123
     ansible_connection=winrm
@@ -469,4 +561,67 @@
     # in managed node, as 'root': to sudo
 
     root# echo "ansible_user  ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ansible
+
+                             #on_all_HOSTS=(as_all_USERS) without_passwd:all_COMMANDS
+    ```
+
+
+
+
+&nbsp;
+
+### c. Using ad hoc commands  
+
+- **ad hoc commands** quick tasks without having to create any playbook  
+
+    | MODULE            | DESCRIPTION                                                                   |
+    |-------------------|-------------------------------------------------------------------------------|
+    | **raw**           | *without using python*, runs arbitrary command using **SSH** (no idempotent)  |
+    | **command**       | default module, runs arbitrary command *without shell* (no idempotent)        |
+    | **shell**         | runs arbitrary command *using shell*  (no idempotent)                         |
+    | **copy**          | copy files os lines of text                                                   |
+    | **yum**           | manage packages on RHEL                                                       |
+    | **packages**      | manage packages                                                               |
+    | **service**       | manage *systemd* ans *System-V* services                                      |
+    | **ping**          | check ig host is in a manageable state (not only ICMP ping)                   |
+    
+
+- **Examples**
+
+    ```
+    ansible    all      -m user    -a "name=lisa  home=/lisa"
+               \_/      \_____/    \________________________/
+              hosts      module           arguments
+
+    ansible    all      -m command -a "id=lisa"
+    
+
+    ansible    -u root  -i inventory ansible3   --ask-pass   -m raw   -a "yum install python3"
+    
+    ansible    all                                            -m copy  -a 'content="hello" dest="/etc/motd"'
+    
+    ansible    all    -m yum      -a "name=nmap state=latest"
+    
+    ansible    all    -m service  -a "name=httpd state=started enabled=yes"
+    
+    ansible    all    -m yum      -a "list=httpd"
+
+    ansible    all    -m shell    -a "rpm -qa|grep ansible"
+    ```
+
+- Running ad-hoc commands from **shell scripts**
+
+1. scripts must be made executable, using `chmod +x myscript.sh`
+
+2. to be started by just by the name, scripts must be located inside a path defined in **`$PATH`** environment variable. Otherway, the script must be started as `/path_to_the_script/myscript.sh`, like in `./myscript.sh`
+
+3. $PATH includes `/usr/local/bin` and `~/.local/bin` as well as `usr/bin` and `~/bin`
+
+4. the script must include the she-bang (setting which program runs the script) as it first line:
+    ```
+    #!/bin/bash
+    
+    ansible host1  -u root  -m raw  -a "dnf install python3 -y"
+    ansible host1  -u root  -m raw  -a "adduser ansible_user"
+    ansible host1  -u root  -m raw  -a 'echo "ansible_user  ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ansible'
     ```
